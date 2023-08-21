@@ -12,7 +12,6 @@ import pt.italo.labseq.service.LabSeqService;
 @RestController
 @RequestMapping(path = "labseq", produces = MediaType.APPLICATION_JSON_VALUE)
 @CrossOrigin
-@Scope(proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class LabSeqController {
 
     @Autowired

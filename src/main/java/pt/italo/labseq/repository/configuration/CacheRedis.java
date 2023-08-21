@@ -17,13 +17,17 @@ public class CacheRedis {
         redisTemplate.opsForValue().set("3", 1L);
     }
 
-    public void saveCache(Map<Long, Long> cache) {
+    public void saveCache(Map<String, Long> cache) {
         cache.forEach((k,v) -> {
-            redisTemplate.opsForValue().set(Long.toString(k), v);
+            redisTemplate.opsForValue().set(k, v);
         });
     }
 
-    public Long getCache(Long numberToCalc) {
-        return redisTemplate.opsForValue().get(Long.toString(numberToCalc));
+    public Long getCache(String numberToCalc) {
+        return redisTemplate.opsForValue().get(numberToCalc);
+    }
+
+    public void save(String numberToCalc, Long result) {
+        redisTemplate.opsForValue().set(numberToCalc, result);
     }
 }
