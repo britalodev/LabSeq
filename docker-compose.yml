@@ -1,11 +1,27 @@
 version: '3.7'
+
 services:
-  redis:
+  spring-app:
     build:
-      dockerfile: redis.dockerfile
-      context: .
-    image: redis
-    restart: always
-    container_name: my-redis
+      context: /labseq
+    ports:
+      - "8080:8080"
+    depends_on:
+      - redis
+    environment:
+      SPRING_REDIS_HOST: redis
+
+  redis:
+    image: redis:latest
     ports:
       - "6379:6379"
+
+  front:
+    build: 
+      context: ./labseqfront
+    volumes:
+      - ./labseqfront:/app
+    working_dir: /app
+    ports:
+      - "3000:8080"
+    command: ["yarn", "serve"]
