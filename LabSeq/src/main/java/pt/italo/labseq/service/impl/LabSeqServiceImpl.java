@@ -4,9 +4,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pt.italo.labseq.exception.ValueUnderZeroException;
-import pt.italo.labseq.repository.configuration.CacheRedis;
+import pt.italo.labseq.repository.CacheRedis;
 import pt.italo.labseq.service.LabSeqService;
-import springfox.documentation.annotations.Cacheable;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,9 +19,13 @@ public class LabSeqServiceImpl implements LabSeqService {
 
 
     @Autowired
-    private CacheRedis cacheRedis;
+    private final CacheRedis cacheRedis;
 
     private final Map<String, Long> cache = new HashMap<>();
+
+    public LabSeqServiceImpl(CacheRedis cacheRedis) {
+        this.cacheRedis = cacheRedis;
+    }
 
     public Long calcFunction(Long numberToCalc) {
 
@@ -39,7 +42,6 @@ public class LabSeqServiceImpl implements LabSeqService {
         preCalc(numberToCalc);
 
         cacheRedis.saveCache(cache);
-        cache.clear();
 
         return checkCache(numberToCalc.toString());
     }

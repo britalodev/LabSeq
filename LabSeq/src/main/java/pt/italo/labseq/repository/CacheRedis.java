@@ -1,4 +1,4 @@
-package pt.italo.labseq.repository.configuration;
+package pt.italo.labseq.repository;
 
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
@@ -31,7 +31,4 @@ public class CacheRedis {
         return redisTemplate.opsForValue().get(numberToCalc);
     }
 
-    public void save(String numberToCalc, Long result) {
-        redisTemplate.opsForValue().set(numberToCalc, result);
-    }
 }
