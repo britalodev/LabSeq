@@ -22,6 +22,7 @@ export default {
   methods: {
     fetchData() {
       const parameter = this.searchParameter;
+      this.data = "";
       const url = `http://localhost:8080/labseq/${parameter}`;
 
       axios.get(url)
