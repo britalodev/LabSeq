@@ -1,5 +1,3 @@
-FROM node
-
-RUN npm install
+FROM node:latest
 
 RUN yarn global add @vue/cli
