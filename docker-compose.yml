@@ -3,7 +3,7 @@ version: '3.7'
 services:
   spring-app:
     build:
-      context: ./labseq
+      context: ./LabSeq
     ports:
       - "8080:8080"
     depends_on:
